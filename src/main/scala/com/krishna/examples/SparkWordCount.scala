@@ -1,15 +1,17 @@
 package com.krishna.examples
 
+import org.apache.log4j.{Level, Logger}
 import org.apache.spark.sql.SparkSession
 
 object SparkWordCount extends App {
+
+  // Set the log level to only print errors
+  Logger.getLogger("org").setLevel(Level.ERROR)
 
   val spark = SparkSession.builder
     .master("local[*]")
     .appName("Spark Word Count")
     .getOrCreate()
-
-  spark.sparkContext.setLogLevel("ERROR")
 
   val lines = spark.sparkContext.parallelize(
     Seq("Spark Intellij Idea Scala test one",
